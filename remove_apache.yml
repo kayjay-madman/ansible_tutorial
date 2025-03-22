@@ -1,0 +1,25 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+    - name: Remove apache configuration and service and package along with libapache2-mod-php
+      apt:
+        name: apache2
+        state: absent
+
+    - name: Remove libapache2-mod-php
+      apt:
+        name: libapache2-mod-php
+        state: absent
+
+    - name: Remove apache service init script and systemd service
+      file:
+        path: /etc/init.d/apache2
+        state: absent
+
+    - name: Remove apache configuration
+      file:
+        path: /etc/apache2/sites-enabled/000-default.conf
+        state: absent
+
