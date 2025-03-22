@@ -3,23 +3,10 @@
 - hosts: all
   become: true
   tasks:
-    - name: Update apt cache
-      apt:
+    - name: Install apache & php support
+      package:
+        name:
+          - "{{ apache_package }}"
+          - "{{ php_package }}"
+        state: present
         update_cache: true
-
-    - name: Install Apache
-      apt:
-        name: apache2
-        state: present
-
-    - name: Add php support for apache
-      apt:
-        name: libapache2-mod-php
-        state: present
-
-    - name: Enable apache service
-      service:
-        name: apache2
-        state: started
-        enabled: true
-
