@@ -1,12 +1,12 @@
 ---
 
-- hosts: all
+- hosts: web_server
   become: true
   tasks:
     - name: Install apache & php support
       package:
         name:
-          - "{{ apache_package }}"
-          - "{{ php_package }}"
+          - apache2
+          - libapache2-mod-php
         state: present
         update_cache: true
